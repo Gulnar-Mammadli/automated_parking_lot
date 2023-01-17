@@ -26,6 +26,7 @@ public class ParkingServicesImpl implements ParkingServices {
     private final CarRepository carRepository;
 
     public ResponseData<Car> parkNewCar(Car car){
+
         List<Floor> floors = floorRepository.findByCeilingHeightGreaterThan(car.getHeight());
         if(floors !=null){
         for(Floor floor: floors) {
@@ -40,6 +41,7 @@ public class ParkingServicesImpl implements ParkingServices {
     }
 
     public ResponseData<Float> unparkCar(String carId){
+
         Optional<Car> car = carRepository.findById(carId);
         if(car.isEmpty()){
             return GenerateResponseUtility.unparkFunc.generate(NOT_FOUND_CODE,NOT_FOUND_MESSAGE,null);
