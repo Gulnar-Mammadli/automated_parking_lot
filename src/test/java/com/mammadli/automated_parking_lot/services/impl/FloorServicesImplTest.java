@@ -33,7 +33,7 @@ class FloorServicesImplTest {
     private FloorRepository floorRepository;
 
     @MockBean
-    private  ParkingLotRepository parkingLotRepository;
+    private ParkingLotRepository parkingLotRepository;
 
     @MockBean
     private ModelMapper modelMapper;
@@ -46,35 +46,35 @@ class FloorServicesImplTest {
     @Test
     void testCreateSuccess() {
 
-            FloorDto floorDto = new FloorDto();
-            Floor newFloor = new Floor();
-            ParkingLot parkingLot = new ParkingLot();
-            when(modelMapper.map(any(), any())).thenReturn(newFloor);
-            when(parkingLotRepository.findById(any())).thenReturn(Optional.of(parkingLot));
-            when(floorRepository.save(any())).thenReturn(newFloor);
+        FloorDto floorDto = new FloorDto();
+        Floor newFloor = new Floor();
+        ParkingLot parkingLot = new ParkingLot();
+        when(modelMapper.map(any(), any())).thenReturn(newFloor);
+        when(parkingLotRepository.findById(any())).thenReturn(Optional.of(parkingLot));
+        when(floorRepository.save(any())).thenReturn(newFloor);
 
-            ResponseData<Floor> result = floorServicesImpl.create(floorDto);
+        ResponseData<Floor> result = floorServicesImpl.create(floorDto);
 
-            assertEquals(SUCCESS_CODE, result.getCode());
-            assertEquals(SUCCESS_MESSAGE, result.getMessage());
-            assertEquals(newFloor, result.getData());
-            verify(modelMapper).map(floorDto, Floor.class);
-            verify(parkingLotRepository).findById(floorDto.getParkingLotId());
-            verify(floorRepository).save(newFloor);
+        assertEquals(SUCCESS_CODE, result.getCode());
+        assertEquals(SUCCESS_MESSAGE, result.getMessage());
+        assertEquals(newFloor, result.getData());
+        verify(modelMapper).map(floorDto, Floor.class);
+        verify(parkingLotRepository).findById(floorDto.getParkingLotId());
+        verify(floorRepository).save(newFloor);
     }
 
-        @Test
-        public void testCreate_ParkingLotNotFound() {
-            FloorDto floorDto = new FloorDto();
-            when(parkingLotRepository.findById(any())).thenReturn(Optional.empty());
+    @Test
+    public void testCreate_ParkingLotNotFound() {
+        FloorDto floorDto = new FloorDto();
+        when(parkingLotRepository.findById(any())).thenReturn(Optional.empty());
 
-            ResponseData<Floor> result = floorServicesImpl.create(floorDto);
+        ResponseData<Floor> result = floorServicesImpl.create(floorDto);
 
-            assertEquals(NOT_FOUND_CODE, result.getCode());
-            assertEquals(NOT_FOUND_MESSAGE, result.getMessage());
-            assertEquals(null, result.getData());
-            verify(parkingLotRepository).findById(floorDto.getParkingLotId());
-        }
+        assertEquals(NOT_FOUND_CODE, result.getCode());
+        assertEquals(NOT_FOUND_MESSAGE, result.getMessage());
+        assertEquals(null, result.getData());
+        verify(parkingLotRepository).findById(floorDto.getParkingLotId());
+    }
 
     @Test
     void testDeleteSuccess() {
