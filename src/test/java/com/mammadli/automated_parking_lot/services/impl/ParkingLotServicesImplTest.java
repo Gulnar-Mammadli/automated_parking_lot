@@ -35,7 +35,7 @@ class ParkingLotServicesImplTest {
     void testCreateSuccess() {
 
         ParkingLot parkingLot = new ParkingLot();
-        when(parkingLotRepository.save(parkingLot)).thenReturn(parkingLot);
+        when(parkingLotRepository.save(any())).thenReturn(parkingLot);
 
         ResponseData<ParkingLot> actualResult = parkingLotServicesImpl.create(parkingLot);
 
@@ -49,7 +49,7 @@ class ParkingLotServicesImplTest {
     void testDeleteSuccess() {
         ParkingLot parkingLot = new ParkingLot();
         Optional<ParkingLot> optionalResult = Optional.of(parkingLot);
-        when(parkingLotRepository.findById(id)).thenReturn(optionalResult);
+        when(parkingLotRepository.findById(any())).thenReturn(optionalResult);
 
         ResponseData<String> actualResult = parkingLotServicesImpl.delete(id);
 
@@ -61,7 +61,7 @@ class ParkingLotServicesImplTest {
 
     @Test
     void testDeleteNotFound() {
-        when(parkingLotRepository.findById(id)).thenReturn(Optional.empty());
+        when(parkingLotRepository.findById(any())).thenReturn(Optional.empty());
 
         ResponseData<String> actualResult = parkingLotServicesImpl.delete(id);
 
