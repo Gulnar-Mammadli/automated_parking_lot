@@ -47,6 +47,7 @@ class ParkingLotServicesImplTest {
 
     @Test
     void testDeleteSuccess() {
+
         ParkingLot parkingLot = new ParkingLot();
         Optional<ParkingLot> optionalResult = Optional.of(parkingLot);
         when(parkingLotRepository.findById(any())).thenReturn(optionalResult);
@@ -61,6 +62,7 @@ class ParkingLotServicesImplTest {
 
     @Test
     void testDeleteNotFound() {
+
         when(parkingLotRepository.findById(any())).thenReturn(Optional.empty());
 
         ResponseData<String> actualResult = parkingLotServicesImpl.delete(id);
