@@ -66,7 +66,7 @@ class FloorServicesImplTest {
         @Test
         public void testCreate_ParkingLotNotFound() {
             FloorDto floorDto = new FloorDto();
-            when(parkingLotRepository.findById(floorDto.getParkingLotId())).thenReturn(Optional.empty());
+            when(parkingLotRepository.findById(any())).thenReturn(Optional.empty());
 
             ResponseData<Floor> result = floorServicesImpl.create(floorDto);
 
@@ -81,7 +81,7 @@ class FloorServicesImplTest {
 
         Floor floor = new Floor();
         Optional<Floor> optionalResult = Optional.of(floor);
-        when(floorRepository.findById(id)).thenReturn(optionalResult);
+        when(floorRepository.findById(any())).thenReturn(optionalResult);
 
         ResponseData<String> actualResult = floorServicesImpl.delete(id);
 
@@ -94,7 +94,7 @@ class FloorServicesImplTest {
     @Test
     void testDeleteNotFound() {
 
-        when(floorRepository.findById(id)).thenReturn(Optional.empty());
+        when(floorRepository.findById(any())).thenReturn(Optional.empty());
 
         ResponseData<String> actualResult = floorServicesImpl.delete(id);
 
