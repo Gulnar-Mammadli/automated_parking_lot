@@ -28,6 +28,7 @@ public class FloorServicesImpl implements FloorServices {
 
     @Override
     public ResponseData<Floor> create(FloorDto floor) {
+
         Floor newFloor = modelMapper.map(floor, Floor.class);
         Optional<ParkingLot> parkingLot = parkingLotRepository.findById(floor.getParkingLotId());
         if(parkingLot.isEmpty()){
@@ -41,6 +42,7 @@ public class FloorServicesImpl implements FloorServices {
 
     @Override
     public ResponseData<String> delete(String id) {
+
         Optional<Floor> result = floorRepository.findById(id);
         if(result.isPresent()) {
             floorRepository.deleteById(result.get().getId());
