@@ -19,9 +19,6 @@ import static org.mockito.ArgumentMatchers.any;
 @ContextConfiguration(classes = {ParkingLotServicesImpl.class})
 @ExtendWith(SpringExtension.class)
 class ParkingLotServicesImplTest {
-
-    //    private static final String  ID = "1";
-//    private static final float PRICE = 1.5f;
     public static int SUCCESS_CODE = 200;
     public static int NOT_FOUND_CODE = 404;
     public static int ALREADY_EXIST_CODE = 409;
@@ -51,14 +48,12 @@ class ParkingLotServicesImplTest {
 
     @Test
     public void testCreateAlreadyExist() {
-        // Arrange
+
         ParkingLot parkingLot = new ParkingLot();
         when(parkingLotRepository.save(parkingLot)).thenReturn(null);
 
-        // Act
         ResponseData<ParkingLot> result = parkingLotServicesImpl.create(parkingLot);
 
-        // Assert
         assertEquals(ALREADY_EXIST_CODE, result.getCode());
         assertEquals(ALREADY_EXIST_MESSAGE, result.getMessage());
         assertEquals(null, result.getData());
