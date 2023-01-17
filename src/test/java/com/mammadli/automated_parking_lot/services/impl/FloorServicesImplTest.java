@@ -41,6 +41,8 @@ class FloorServicesImplTest {
     @Autowired
     private FloorServicesImpl floorServicesImpl;
 
+    String id = "1";
+
     @Test
     void testCreateSuccess() {
 
@@ -76,7 +78,7 @@ class FloorServicesImplTest {
 
     @Test
     void testDeleteSuccess() {
-        String id = "1";
+
         Floor floor = new Floor();
         Optional<Floor> optionalResult = Optional.of(floor);
         when(floorRepository.findById(id)).thenReturn(optionalResult);
@@ -91,7 +93,7 @@ class FloorServicesImplTest {
 
     @Test
     void testDeleteNotFound() {
-        String id = "1";
+
         when(floorRepository.findById(id)).thenReturn(Optional.empty());
 
         ResponseData<String> actualResult = floorServicesImpl.delete(id);
