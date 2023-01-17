@@ -23,6 +23,7 @@ public class ParkingLotServicesImpl implements ParkingLotServices {
     private final ParkingLotRepository parkingLotRepository;
     @Override
     public ResponseData<ParkingLot> create(ParkingLot parkingLot) {
+
         ParkingLot newParkingLot = parkingLotRepository.save(parkingLot);
         if(newParkingLot != null) {
             return GenerateResponseUtility.parkingLotFunc.generate(SUCCESS_CODE, SUCCESS_MESSAGE, newParkingLot);
@@ -31,6 +32,7 @@ public class ParkingLotServicesImpl implements ParkingLotServices {
     }
     @Override
     public ResponseData<String> delete(String id) {
+
         Optional<ParkingLot> result = parkingLotRepository.findById(id);
         if(result.isPresent()){
             parkingLotRepository.deleteById(result.get().getId());
