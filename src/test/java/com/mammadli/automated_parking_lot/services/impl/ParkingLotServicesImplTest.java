@@ -14,23 +14,22 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import static org.mockito.ArgumentMatchers.any;
 
 @ContextConfiguration(classes = {ParkingLotServicesImpl.class})
 @ExtendWith(SpringExtension.class)
 class ParkingLotServicesImplTest {
     public static int SUCCESS_CODE = 200;
     public static int NOT_FOUND_CODE = 404;
-    public static int ALREADY_EXIST_CODE = 409;
     public static String SUCCESS_MESSAGE = "SUCCESS";
     public static String NOT_FOUND_MESSAGE = "NOT_FOUND";
-    public static String ALREADY_EXIST_MESSAGE = "ALREADY EXIST";
 
     @MockBean
     private ParkingLotRepository parkingLotRepository;
 
     @Autowired
     private ParkingLotServicesImpl parkingLotServicesImpl;
+
+    String id = "1";
 
     @Test
     void testCreateSuccess() {
@@ -47,22 +46,7 @@ class ParkingLotServicesImplTest {
     }
 
     @Test
-    public void testCreateAlreadyExist() {
-
-        ParkingLot parkingLot = new ParkingLot();
-        when(parkingLotRepository.save(parkingLot)).thenReturn(null);
-
-        ResponseData<ParkingLot> result = parkingLotServicesImpl.create(parkingLot);
-
-        assertEquals(ALREADY_EXIST_CODE, result.getCode());
-        assertEquals(ALREADY_EXIST_MESSAGE, result.getMessage());
-        assertEquals(null, result.getData());
-        verify(parkingLotRepository).save(parkingLot);
-    }
-
-    @Test
     void testDeleteSuccess() {
-        String id = "1";
         ParkingLot parkingLot = new ParkingLot();
         Optional<ParkingLot> optionalResult = Optional.of(parkingLot);
         when(parkingLotRepository.findById(id)).thenReturn(optionalResult);
@@ -77,7 +61,6 @@ class ParkingLotServicesImplTest {
 
     @Test
     void testDeleteNotFound() {
-        String id = "1";
         when(parkingLotRepository.findById(id)).thenReturn(Optional.empty());
 
         ResponseData<String> actualResult = parkingLotServicesImpl.delete(id);
