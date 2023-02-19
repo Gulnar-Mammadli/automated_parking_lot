@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @NoArgsConstructor
@@ -24,8 +25,8 @@ public class ParkingLot {
 
     private String id;
 
-    @OneToMany
+    @OneToMany(mappedBy = "parkingLot",cascade = CascadeType.ALL)
     private List<Floor> floorList;
 
-    private float price;
+    private BigDecimal price;
 }
