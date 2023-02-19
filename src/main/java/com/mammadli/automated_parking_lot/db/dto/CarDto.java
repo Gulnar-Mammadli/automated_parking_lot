@@ -1,8 +1,5 @@
 package com.mammadli.automated_parking_lot.db.dto;
 
-import com.mammadli.automated_parking_lot.db.entity.Floor;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

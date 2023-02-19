@@ -31,8 +31,10 @@ public class Floor {
     private int maxCapacity;
 
     @ManyToOne
+    @JoinColumn(name = "parkingLotId")
     private ParkingLot parkingLot;
-    @OneToMany
+
+    @OneToMany(mappedBy = "floor",cascade = CascadeType.ALL)
     private List<Car> cars;
 
     public boolean spaceExists() {

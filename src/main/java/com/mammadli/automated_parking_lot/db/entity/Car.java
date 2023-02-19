@@ -31,6 +31,7 @@ public class Car {
     private int weight;
 
     @ManyToOne
+    @JoinColumn(name = "floorId")
     private Floor floor;
 
     private LocalDateTime parkingTime;
