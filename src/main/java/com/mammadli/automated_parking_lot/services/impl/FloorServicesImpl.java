@@ -43,6 +43,10 @@ public class FloorServicesImpl implements FloorServices {
 
     @Override
     public List<Floor> getFloors(String parkingLotId) {
+        List<Floor> floorList = floorRepository.findAllByParkingLotId(parkingLotId);
+        if(!floorList.isEmpty()){
+            return floorList;
+        }
         return null;
     }
 }

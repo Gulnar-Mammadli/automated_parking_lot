@@ -1,17 +1,16 @@
 package com.mammadli.automated_parking_lot.db.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Builder
 @Entity
 @Table(name = "car")
@@ -30,8 +29,9 @@ public class Car {
 
     private int weight;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "floor_id",referencedColumnName = "id")
+    @ManyToOne()
+//    @JoinColumn(name = "floor_id",referencedColumnName = "id")
+    @JsonIgnoreProperties(value = {"cars"}, allowSetters = true,allowGetters = true)
     private Floor floor;
 
     private LocalDateTime parkingTime;

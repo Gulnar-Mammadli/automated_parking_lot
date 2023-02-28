@@ -9,6 +9,7 @@ import com.mammadli.automated_parking_lot.db.repository.FloorRepository;
 import com.mammadli.automated_parking_lot.db.repository.ParkingLotRepository;
 import com.mammadli.automated_parking_lot.mapper.CarMapper;
 import com.mammadli.automated_parking_lot.services.CarServices;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,16 @@ public class CarServicesImpl implements CarServices {
     private final CarRepository carRepository;
 
     private final ParkingLotRepository parkingLotRepository;
+
+    @PostConstruct
+    public void init() {
+        Car car = Car.builder()
+                .id("b389f554-2e3f-41de-bd79-0e8802ac9133")
+                .weight(2)
+                .height(22)
+                .build();
+        carRepository.save(car);
+    }
 
     public Car parkNewCar(CarDto carDto) {
 

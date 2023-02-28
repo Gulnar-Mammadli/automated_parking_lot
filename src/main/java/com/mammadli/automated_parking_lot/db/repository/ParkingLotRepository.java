@@ -9,5 +9,4 @@ import java.util.List;
 
 @Repository
 public interface ParkingLotRepository extends CrudRepository<ParkingLot,String> {
-//    List<Floor> findAllById(String parkingLotId);
 }
