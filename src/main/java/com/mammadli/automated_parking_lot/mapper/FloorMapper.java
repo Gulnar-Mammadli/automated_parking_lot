@@ -14,4 +14,7 @@ public interface FloorMapper {
    @Mapping( target = "parkingLot.id",source = "floorDto.parkingLotId")
    Floor toFloor(FloorDto floorDto);
 
+   @Mapping( target = "parkingLotId",source = "floor.parkingLot.id")
+   FloorDto toFloorDto(Floor floor);
+
 }
