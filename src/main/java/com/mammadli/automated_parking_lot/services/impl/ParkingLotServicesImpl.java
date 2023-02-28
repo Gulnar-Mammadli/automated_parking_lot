@@ -16,10 +16,12 @@ public class ParkingLotServicesImpl implements ParkingLotServices {
 
     private final ParkingLotRepository parkingLotRepository;
 
+
     @Override
     public ParkingLot create(ParkingLotDto parkingLotDto) {
+        ParkingLot parkingLot = ParkingLotMapper.INSTANCE.toParkingLot(parkingLotDto);
 
-        return parkingLotRepository.save(ParkingLotMapper.INSTANCE.toParkingLot(parkingLotDto));
+        return parkingLotRepository.save(parkingLot);
     }
 
     @Override

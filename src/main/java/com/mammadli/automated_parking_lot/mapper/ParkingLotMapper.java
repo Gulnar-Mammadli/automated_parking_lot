@@ -12,6 +12,4 @@ public interface ParkingLotMapper {
 
     ParkingLot toParkingLot(ParkingLotDto parkingLotDto);
 
-    ParkingLotDto toParkingLotDto(ParkingLot parkingLot);
-
 }

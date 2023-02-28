@@ -10,6 +10,7 @@ import com.mammadli.automated_parking_lot.services.FloorServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,11 +23,11 @@ public class FloorServicesImpl implements FloorServices {
     @Override
     public Floor create(FloorDto floorDto) {
 
-        Floor newFloor = FloorMapper.INSTANCE.toFloor(floorDto);
         Optional<ParkingLot> parkingLot = parkingLotRepository.findById(floorDto.getParkingLotId());
         if (parkingLot.isEmpty()) {
             return null;
         }
+        Floor newFloor = FloorMapper.INSTANCE.toFloor(floorDto);
         newFloor.setParkingLot(parkingLot.get());
         return floorRepository.save(newFloor);
     }
@@ -37,6 +38,11 @@ public class FloorServicesImpl implements FloorServices {
 
         Optional<Floor> result = floorRepository.findById(id);
         result.ifPresent(floor -> floorRepository.deleteById(floor.getId()));
+        return null;
+    }
+
+    @Override
+    public List<Floor> getFloors(String parkingLotId) {
         return null;
     }
 }

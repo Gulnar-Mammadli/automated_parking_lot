@@ -64,6 +64,11 @@ public class CarServicesImpl implements CarServices {
         return null;
     }
 
+    @Override
+    public List<Car> getCars(String floorId) {
+        return null;
+    }
+
 
     private boolean pay(BigDecimal bill, String carId) {
         return true;

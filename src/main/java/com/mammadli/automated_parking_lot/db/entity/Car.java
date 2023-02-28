@@ -30,8 +30,8 @@ public class Car {
 
     private int weight;
 
-    @ManyToOne
-    @JoinColumn(name = "floorId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "floor_id",referencedColumnName = "id")
     private Floor floor;
 
     private LocalDateTime parkingTime;

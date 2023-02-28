@@ -6,6 +6,8 @@ import com.mammadli.automated_parking_lot.services.FloorServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/floors")
@@ -15,6 +17,11 @@ public class FloorController {
     @PostMapping
     Floor create(@RequestBody FloorDto floorDto) {
         return floorServices.create(floorDto);
+    }
+
+    @GetMapping("/{parkingLotId}")
+    List<Floor> getFloors(@PathVariable String parkingLotId) {
+        return floorServices.getFloors(parkingLotId);
     }
 
     @DeleteMapping("/{id}")

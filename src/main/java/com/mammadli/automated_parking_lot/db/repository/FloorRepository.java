@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface FloorRepository extends CrudRepository<Floor,String> {
     List<Floor> findByCeilingHeightGreaterThan(int height);
+
 }

@@ -1,5 +1,6 @@
 package com.mammadli.automated_parking_lot.db.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -9,10 +10,10 @@ import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
+@Data
 @Builder
 @Entity
-@Table(name = "parkingLot")
+@Table(name = "parking_lot")
 public class ParkingLot {
 
     @Id
@@ -25,7 +26,8 @@ public class ParkingLot {
 
     private String id;
 
-    @OneToMany(mappedBy = "parkingLot",cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToMany(mappedBy = "parkingLot", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Floor> floorList;
 
     private BigDecimal price;
