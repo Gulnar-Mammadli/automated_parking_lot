@@ -20,7 +20,7 @@ public class FloorController {
     }
 
     @GetMapping("/{parkingLotId}")
-    List<Floor> getFloors(@PathVariable String parkingLotId) {
+    List<FloorDto> getFloors(@PathVariable String parkingLotId) {
         return floorServices.getFloors(parkingLotId);
     }
 

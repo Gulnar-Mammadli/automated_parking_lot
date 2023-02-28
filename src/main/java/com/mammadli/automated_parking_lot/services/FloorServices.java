@@ -10,5 +10,5 @@ public interface FloorServices {
 
     Void delete(String id);
 
-    List<Floor> getFloors(String parkingLotId);
+    List<FloorDto> getFloors(String parkingLotId);
 }

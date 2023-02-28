@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -42,10 +43,13 @@ public class FloorServicesImpl implements FloorServices {
     }
 
     @Override
-    public List<Floor> getFloors(String parkingLotId) {
+    public List<FloorDto> getFloors(String parkingLotId) {
         List<Floor> floorList = floorRepository.findAllByParkingLotId(parkingLotId);
-        if(!floorList.isEmpty()){
-            return floorList;
+        if (!floorList.isEmpty()) {
+            return floorList.stream()
+                    .map(FloorMapper.INSTANCE::toFloorDto)
+                    .collect(Collectors.toList());
+
         }
         return null;
     }
